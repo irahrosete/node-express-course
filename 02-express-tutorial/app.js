@@ -12,7 +12,7 @@ app.get('/api/people', (req, res) => {
   res.status(200).json({ success: true, data: people })
 })
 
-// CHECK! this is not working
+// CHECK! POST is not working
 app.post('api/people', (req, res) => {
   const { name } = req.body
   if (!name) {
@@ -41,6 +41,7 @@ app.post('/login', (req, res) => {
   res.status(400).send('Please enter name')
 })
 
+// CHECK! PUT is not working
 app.put('api/people/:id', (req, res) => {
   const { id } = req.params
   const { name } = req.body

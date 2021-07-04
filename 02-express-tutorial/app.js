@@ -1,22 +1,20 @@
-const http = require('http')
+const express = require('express')
+const app = express()
 
-const server = http.createServer((req, res) => {
-  console.log('user hit the server')
-
-  const url = req.url
-  if (req.url === '/') {
-    res.writeHead(200, { 'content-type': 'text/html' })
-    res.write('<h1>Home Page</h1>')
-    res.end()
-  } else if (req.url === '/about') {
-    res.writeHead(200, { 'content-type': 'text/html' })
-    res.write('<h1>About Page</h1>')
-    res.end()
-  } else {
-    res.writeHead(404, { 'content-type': 'text/html' })
-    res.write('<h1>File Not Found</h1>')
-    res.end()
-  }
+app.get('/', (req, res) => {
+  console.log('user hit the home page')
+  res.status(200).send('Home Page')
 })
 
-server.listen(4000)
+app.get('/about', (req, res) => {
+  console.log('user hit the about page')
+  res.status(200).send('About Page')
+})
+
+app.all('*', (req, res) => {
+  res.status(404).send('<h1>resource not found</h1>')
+})
+
+app.listen(5000, () => {
+  console.log('server is listening on port 5000')
+})

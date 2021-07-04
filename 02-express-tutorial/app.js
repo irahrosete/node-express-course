@@ -7,11 +7,27 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/products', (req, res) => {
-  const newProducts = products.map((item) => {
-    const { id, name, image } = item
+  const newProducts = products.map((product) => {
+    const { id, name, image } = product
     return { id, name, image }
   })
   res.json(newProducts)
+})
+
+app.get('/api/products/:productID', (req, res) => {
+  const { productID } = req.params
+  const singleProduct = products.find((product) => {
+    return product.id === Number(productID)
+  })
+  if (!singleProduct) {
+    res.status(404).send('Product does not exist')
+  }
+  res.json(singleProduct)
+})
+
+app.get('/api/products/:productID/reviews/:reviewID', (req, res) => {
+  console.log(req.params)
+  res.send('Hello world!')
 })
 
 app.listen(5000, () => {

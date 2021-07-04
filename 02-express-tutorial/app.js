@@ -7,5 +7,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(5000, () => {
-  console.log('listening on server 5000...')
+  console.log('server listening on port 5000...')
 })
